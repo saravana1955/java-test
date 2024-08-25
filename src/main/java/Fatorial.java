@@ -1,5 +1,6 @@
 public class Fatorial {
 
+
     public int resultadoFatorial(int num){
         int fatorial = 0;
         int n = num;
