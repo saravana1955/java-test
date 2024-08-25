@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'  # Adjust based on your Java version
+          java-version: '11'  # Adjust based on your Java version
 
       - name: Cache Maven packages
         uses: actions/cache@v3
