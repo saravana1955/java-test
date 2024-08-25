@@ -3,7 +3,7 @@ name: Run Tests on PR  # This is the name that will appear in the Actions tab
 on:
   pull_request:
     branches:
-      - main  # Adjust based on your branch
+      - test4  # Adjust based on your branch
 
 jobs:
   build:
