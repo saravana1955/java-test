@@ -40,6 +40,17 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- Use a compatible version -->
+                <configuration>
+                    <source>17</source> <!-- Set to Java version you are using -->
+                    <target>17</target> <!-- Set to Java version you are using -->
+                    <!-- Optional: Set the encoding -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
