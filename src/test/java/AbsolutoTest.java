@@ -8,7 +8,7 @@ public class AbsolutoTest {
         //arrange
         Absoluto absoluto = new Absoluto();
         int actual;
-        int expect = 2;
+        int expect = 3;
 
         //act
         actual = absoluto.retornaValorAbsoluto(-2);
