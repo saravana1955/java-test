@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BigBrotherTest {
-
     BigBrother bigBrother;
     String[] nome;
     @Before
