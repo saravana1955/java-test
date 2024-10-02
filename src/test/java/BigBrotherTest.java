@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class BigBrotherTest {
     BigBrother bigBrother;
+
     String[] nome;
     @Before
     public void prepareTest(){
