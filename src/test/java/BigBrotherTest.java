@@ -9,7 +9,6 @@ public class BigBrotherTest {
 
     BigBrother bigBrother;
     String[] nome;
-
     @Before
     public void prepareTest(){
         bigBrother = new BigBrother();
