@@ -11,7 +11,11 @@ pipeline {
             steps {
                 // Checkout the code from the repository
                 checkout scm
+                script {
+                        echo "Deploying to environment provility: ${env.GIT_BRANCH}"
+                                }
             }
+
         }
 
         stage('Set Environment') {
