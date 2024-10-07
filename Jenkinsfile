@@ -1,38 +1,56 @@
 pipeline {
     agent any
-    stages{
-        stage('Build'){
+
+
+    // Define parameters
+  parameters {
+         choice(name: 'environmentname', choices: ['dev', 'test'], description: 'Select the environment to deploy')
+     }
+
+    stages {
+        stage('Checkout') {
             steps {
-                script{
-                    sh 'mvn clean install -DskipTests'
-                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-                }
+                // Checkout the code from the repository
+                checkout scm
+                script {
+                        echo "Deploying to environment provility: ${env.GIT_BRANCH}"
+                                }
             }
         }
-        stage('Unit Testing'){
-            steps {
-                script{
-                    sh 'mvn clean test'
-                    junit '**/target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Integration Testing') {
+        stage('Set Environment') {
             steps {
                 script {
-                    sh 'if [ -d integration-testing-java ]; then rm -rf integration-testing-java; fi'
-                    sh 'git clone https://github.com/robsonagapito/integration-testing-java.git'
-                    sh 'cd integration-testing-java && mvn verify'
+                    // Set environment based on the branch
+                    if (env.GIT_BRANCH == 'origin/main') {
+                        env.environmentname = 'dev'
+                    } else {
+                        env.environmentname = 'prod'
+                    }
+                    echo "Deploying to environment: ${env.GIT_BRANCH}"
                 }
             }
         }
-        stage ('Cucumber Reports') {
-            steps {
-                    cucumber buildStatus: "UNSTABLE",
-                        fileIncludePattern: "**/CucumberReport.json",
-                        jsonReportDirectory: 'integration-testing-java/target/reports'
 
+        stage('Build') {
+            steps {
+                // Add your build steps here
+                echo "Building the project for ${env.environmentname}..."
+                // Example: sh './build.sh' (replace with your build command)
             }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Add your deployment steps here
+                echo "Deploying to ${env.environmentname} environment..."
+                // Example: sh './deploy.sh' (replace with your deployment command)
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
         }
     }
 }
