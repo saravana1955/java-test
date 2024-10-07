@@ -23,7 +23,7 @@ pipeline {
                     } else {
                         env.environmentname = 'prod'
                     }
-                    echo "Deploying to environment: ${env.environmentname}"
+                    echo "Deploying to environment: ${env.GIT_BRANCH}"
                 }
             }
         }
