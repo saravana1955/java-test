@@ -1,57 +1,23 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(name: 'environmentname', choices: ['dev', 'test', 'prod'], description: 'Select the environment to deploy')
+    }
 
-    // Define parameters
-  parameters {
-         choice(name: 'environmentname', choices: ['dev', 'test'], description: 'Select the environment to deploy')
-     }
+    environment {
+        ENV_NAME = "${params.environmentname}" // Use parameter value from the job configuration
+    }
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from the repository
-                checkout scm
-                script {
-                        echo "Deploying to environment provility: ${env.GIT_BRANCH}"
-                                }
-            }
-        }
-        stage('Set Environment') {
+        stage('Build') {
             steps {
                 script {
-                    // Set environment based on the branch
-                    if (env.GIT_BRANCH == 'origin/main') {
-                        env.environmentname = 'dev'
-                    } else {
-                        env.environmentname = 'prod'
-                    }
-                    echo "Deploying to environment: ${env.GIT_BRANCH}"
+                    // Print environment name to make sure the parameter is passed correctly
+                    echo "Deploying to environment: ${ENV_NAME}"
                 }
             }
         }
-
-        stage('Build') {
-            steps {
-                // Add your build steps here
-                echo "Building the project for ${env.environmentname}..."
-                // Example: sh './build.sh' (replace with your build command)
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Add your deployment steps here
-                echo "Deploying to ${env.environmentname} environment..."
-                // Example: sh './deploy.sh' (replace with your deployment command)
-            }
-        }
-    }
-
-
-    post {
-        always {
-            echo 'Pipeline finished.'
-        }
+        // Add more stages as needed
     }
 }
