@@ -15,7 +15,6 @@ pipeline {
                         echo "Deploying to environment provility: ${env.GIT_BRANCH}"
                                 }
             }
-
         }
 
         stage('Set Environment') {
