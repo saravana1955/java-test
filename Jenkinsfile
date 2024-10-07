@@ -6,6 +6,7 @@ pipeline {
   parameters {
          choice(name: 'environmentname', choices: ['dev', 'test'], description: 'Select the environment to deploy')
      }
+
     stages {
         stage('Checkout') {
             steps {
