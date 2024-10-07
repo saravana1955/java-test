@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     // Define parameters
-    parameters {
-        string(name: 'environmentname', defaultValue: 'prod', description: 'Environment to deploy to')
-    }
+  parameters {
+         choice(name: 'environmentname', choices: ['dev', 'test'], description: 'Select the environment to deploy')
+     }
 
     stages {
         stage('Checkout') {
