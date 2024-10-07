@@ -16,7 +16,6 @@ pipeline {
                                 }
             }
         }
-
         stage('Set Environment') {
             steps {
                 script {
